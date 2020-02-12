@@ -1,5 +1,5 @@
 import numpy as np
-from .MyDataset import MyDataset
+from .FacialExpressionDataset import FacialExpressionDataset
 from torch.utils.data import DataLoader, random_split
 from logger import logging
 from torchvision.datasets.folder import ImageFolder
