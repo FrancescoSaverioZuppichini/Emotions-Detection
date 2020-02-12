@@ -19,7 +19,7 @@ if __name__ == '__main__':
         'lr': 0.001,
         'batch_size': 64,
         'epochs': 10,
-        'model': 'resnet18-finetune'
+        'model': 'resnet18'
     }
     logging.info(f'Using device={device} 🚀')
     # everything starts with the data
@@ -37,7 +37,7 @@ if __name__ == '__main__':
     show_dl(train_dl)
     show_dl(test_dl)
     # define our comet experiment
-    experiment = Experiment(api_key="YOU_KEY",
+    experiment = Experiment(api_key="8THqoAxomFyzBgzkStlY95MOf",
                             project_name="dl-pytorch-template", workspace="francescosaveriozuppichini")
     experiment.log_parameters(params)
     # create our special resnet18
