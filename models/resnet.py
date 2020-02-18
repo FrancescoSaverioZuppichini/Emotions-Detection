@@ -18,11 +18,26 @@ def resnet_factory(resnet: torch.nn.Module,
     :type n_classes: int, optional
     """
     model = resnet(pretrained=False)
-    model.conv1 = nn.Conv2d(1,
+    model.conv1 = nn.Conv2d(n_channel,
                             64,
                             kernel_size=7,
                             stride=2,
                             padding=3,
+                            bias=False)
+    model.fc = nn.Linear(512, n_classes)
+    return model
+
+
+def micro_resnet_factory(resnet: torch.nn.Module,
+                         n_channel: int = 3,
+                         n_classes: int = 1000):
+
+    model = resnet(pretrained=False)
+    model.conv1 = nn.Conv2d(1,
+                            64,
+                            kernel_size=3,
+                            stride=1,
+                            padding=1,
                             bias=False)
     model.fc = nn.Linear(512, 8)
     return model

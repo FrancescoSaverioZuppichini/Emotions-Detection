@@ -20,7 +20,7 @@ if __name__ == '__main__':
         'lr': 0.001,
         'batch_size': 64,
         'epochs': 100,
-        'model': 'resnet18',
+        'model': 'my-cnn',
         # 'data-aug': 'flip-rot(-20,20)-blur',
         'data-aug': None,
         'shape': '48-48'
@@ -28,7 +28,7 @@ if __name__ == '__main__':
     logging.info(f'Using device={device} 🚀')
     # everything starts with the data
     train_dl, val_dl, test_dl = get_dataloaders(
-        project.data_dir / "train",
+        project.data_dir,
         split=(0.25, 0.5),
         val_transform=val_transform,
         train_transform=train_transform,
@@ -38,15 +38,16 @@ if __name__ == '__main__':
     )
     # is always good practice to visualise some of the train and val images to be sure data-aug
     # is applied properly
-    # show_dl(train_dl)
-    # show_dl(test_dl)
+    show_dl(train_dl)
+    show_dl(test_dl)
     # define our comet experiment
     experiment = Experiment(api_key="8THqoAxomFyzBgzkStlY95MOf",
                             project_name="dl-pytorch-template", workspace="francescosaveriozuppichini")
     experiment.log_parameters(params)
-    # create our special resnet18
+    # create our model
+    cnn = MyCNN(1, n_classes=8).to(device)
     # cnn = resnet18(True).to(device)
-    cnn = resnet_factory(resnet18, n_channel=1, n_classes=8).to(device)
+    # cnn = resnet_factory(resnet18, n_channel=1, n_classes=8).to(device)
     # print the model summary to show useful information
     logging.info(summary(cnn, (1, 48, 48)))
     # define custom optimizer and instantiace the trainer `Model`

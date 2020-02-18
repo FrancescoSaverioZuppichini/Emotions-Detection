@@ -2,7 +2,7 @@ import torch.nn as nn
 
 
 class MyCNN(nn.Module):
-    def __init__(self, in_features=3, classes=2):
+    def __init__(self, in_features=3, n_classes=2):
         super().__init__()
         self.encoder = nn.Sequential(
             nn.Conv2d(in_features, 32, kernel_size=3),
@@ -22,7 +22,7 @@ class MyCNN(nn.Module):
 
         self.decoder = nn.Sequential(
             nn.Flatten(1),
-            nn.Linear(128, classes))
+            nn.Linear(128, n_classes))
 
     def forward(self, x):
         x = self.encoder(x)
