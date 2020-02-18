@@ -8,7 +8,7 @@ class Project:
     This class represents our project. It stores useful information about the structure, e.g. paths.
     """
     base_dir: Path = Path(__file__).parents[0]
-    data_dir = base_dir / 'dataset'
+    data_dir = base_dir / 'dataset/facial_expression'
     checkpoint_dir = base_dir / 'checkpoint'
 
     def __post_init__(self):
